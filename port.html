@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BEZA PORTFOLIO</title>
+
+  <style>
+    /* ===== RESET ===== */
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
+    }
+
+    /* ===== THEME VARIABLES ===== */
+    :root{
+      --bg:#f5f6fa;
+      --text:#1f2937;
+      --card:#ffffff;
+      --accent:#3730A3;
+      --accent-2:#3e0567;
+    }
+
+    body.dark{
+      --bg:#0f1020;
+      --text:#e5e7eb;
+      --card:#1a1b3a;
+      --accent:#8b5cf6;
+      --accent-2:#4c1d95;
+    }
+
+    body{
+      background:var(--bg);
+      color:var(--text);
+      overflow-x:hidden;
+      animation:pageFade 1.6s ease;
+    }
+
+    @keyframes pageFade{
+      from{opacity:0; transform:translateY(10px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    /* ===== NAVBAR ===== */
+    nav{
+      background:linear-gradient(45deg,var(--accent-2),var(--accent));
+      padding:1rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:10;
+    }
+
+    .navdiv {
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .nav-links{
+      display:flex;
+      gap:1.5rem;
+      list-style:none;
+    }
+
+    .nav-links a{
+      color:white;
+      text-decoration:none;
+      font-weight:500;
+      transition:color 0.3s;
+    }
+
+    .nav-links a:hover{color:#a5b4fc}
+
+    /* ===== THEME SWITCH ===== */
+    .switch{
+      width:50px;
+      height:26px;
+      background:#ddd;
+      border-radius:999px;
+      position:relative;
+      cursor:pointer;
+    }
+
+    .switch::after{
+      content:"";
+      width:20px;
+      height:20px;
+      background:white;
+      border-radius:50%;
+      position:absolute;
+      top:3px;
+      left:3px;
+      transition:0.3s;
+    }
+
+    body.dark .switch{background:#6d28d9}
+    body.dark .switch::after{left:27px}
+
+    .hero{display: flex; align-items: center;justify-content: space-between; gap: 40px; padding: 60px;}
+    .hero h1{font-size:2.5rem;}
+    .hero-text{flex: 1;}
+    .hero p{margin:1rem 0 2rem}
+    .nav-item{display: none;}
+
+    .btn{
+      padding:5px;
+      background:var(--accent);
+      color:white;
+      text-decoration:none;
+      border-radius:6px;
+      transition:transform 0.3s;
+    }
+
+    
+
+    .btn:hover{transform:translateY(-3px)}
+
+    .profile-img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 25px rgba(59, 130, 246,0.35), 0 0 60px rgba(34, 211, 228,0.15);
+      
+    }
+
+   .profile-img img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+    }
+
+    /* ===== SKILLS ===== */
+    section{max-width:1200px;margin:50px;padding:0 2rem}
+
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:2rem;
+    }
+
+    .skill-card{
+      background:var(--card);
+      padding:2rem;
+      border-radius:12px;
+      text-align:center;
+      transition:transform 0.4s, box-shadow 0.4s;
+    }
+
+    .skill-card:hover{
+      transform:translateY(-10px) scale(1.03);
+      box-shadow:0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    footer{
+      text-align:center;
+      padding:2rem;
+      color:var(--text);
+    }
+
+    @media(max-width:768px)
+    {
+      
+      .hero{
+        gap: 0px;
+        padding: 0px;
+      }
+
+      /* ===== SIDE NAV ===== */
+    .side-nav{
+      position:fixed;
+      width: 50px;
+      transition: width 0.5s ease;
+      left:0;
+      top:50%;
+      transform:translateY(-50%);
+      background:var(--card);
+      padding:1rem;
+      border-radius:0 12px 12px 0;
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .side-nav a{
+      display:block;
+      margin:1rem 0;
+      text-decoration:none;
+      color:var(--accent);
+      font-weight:600;
+      transition:transform 0.3s;
+    }
+
+    .side-nav a:hover{transform:translateX(5px); width: 150px;}
+
+    .nav-item {
+      position: relative;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .nav-item::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #3730A3;
+      color: #ddd;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+
+    /* ==== Show on Hover ==== */
+
+    .nav-item:hover::after{
+      opacity: 1;
+      left: 45px;
+    }
+
+    /* ==== Glow ====  */
+    .nav-item:hover{
+      color: #4c1d95;
+    }
+    
+    /* otherstyles */
+    .nav-links{display: none;}
+    .hero{gap: 20px;}
+    .buttons{display: flex;font-size: 13px; gap: 2px;text-align:center ;}
+    .section{ margin: 0px;padding: 0;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    
+    <div class="navdiv">
+      <img src="./BackgroundEraser_20251124_104934773.png" alt="" style="height: 50px;">
+      <h2 style="color: white;" >BEZADEV</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home 🏠</a></li>
+      <li><a href="#skills">Skills 🛠</a></li>
+      <li><a href="projects.html">Projects 📁</a></li>
+    </ul>
+    <div class="switch" id="themeSwitch">☀️ 🌙</div>
+  </nav>
+
+  <div class="side-nav">
+    <a href="#"  class="nav-item" data-label="Home">🏠</a>
+    <a href="#skills" class="nav-item" data-label="skills">🛠</a>
+    <a href="projects.html"  class="nav-item" data-label="projects">📁</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Hi, I'm BezaDev</h1>
+      <p>Frontend developer creating modern, responsive, beautiful & unique websites. </p>
+      <p style="font-family: serif; font-weight: 600;"> Motto: Authority written in codes👑</p>
+      <div class="buttons">
+        <a href="projects.html" class="btn">My Projects</a>
+        <a href="tel:+2349130914994" class="btn">Contact Me</a></div>
+      
+     </div>
+     <div class="profile-img">
+      <img src="./Snapchat-1065045650.jpg" alt="Photo of developer">
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Web Development</h3>
+        <p>HTML, CSS, JavaScript & React</p>
+      </div>
+      <div class="skill-card">
+        <h3>Responsive Design</h3>
+        <p>Mobile & Browser Friendly</p>
+      </div>
+      <div class="skill-card">
+        <h3>Unique UI/UX</h3>
+        <p>Animations, Color Styles and Transitions</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 • Beza Portfolio</footer>
+
+  <script>
+    const switchBtn = document.getElementById('themeSwitch');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      switchBtn.checked = true;
+    }
+    // Toggle and save Theme 
+    switchBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+
+      if (document.body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark')
+      } else {
+        localStorage.setItem('theme', 'light')
+      }
+    })
+  </script>
+
+</body>
+</html>
